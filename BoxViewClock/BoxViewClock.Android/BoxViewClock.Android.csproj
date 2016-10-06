@@ -113,6 +113,18 @@
   <ItemGroup>
     <Content Include="Properties\AndroidManifest.xml" />
     <AndroidResource Include="Resources\Drawable\m01.jpg" />
+    <AndroidResource Include="Resources\Drawable\m12.jpg" />
+    <AndroidResource Include="Resources\Drawable\m13.jpg" />
+    <AndroidResource Include="Resources\Drawable\m02.jpg" />
+    <AndroidResource Include="Resources\Drawable\m03.jpg" />
+    <AndroidResource Include="Resources\Drawable\m04.jpg" />
+    <AndroidResource Include="Resources\Drawable\m05.jpg" />
+    <AndroidResource Include="Resources\Drawable\m06.jpg" />
+    <AndroidResource Include="Resources\Drawable\m07.jpg" />
+    <AndroidResource Include="Resources\Drawable\m08.jpg" />
+    <AndroidResource Include="Resources\Drawable\m09.jpg" />
+    <AndroidResource Include="Resources\Drawable\m10.jpg" />
+    <AndroidResource Include="Resources\Drawable\m11.jpg" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BoxViewClock\BoxViewClock.csproj">
