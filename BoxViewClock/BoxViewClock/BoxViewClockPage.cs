@@ -24,6 +24,10 @@ namespace BoxViewClock
         static readonly HandParams minuteParams = new HandParams(0.05, 0.8, 0.9);
         static readonly HandParams hourParams = new HandParams(0.125, 0.65, 0.9);
 
+        static readonly Color tickMarksColor = Color.Accent;
+        static readonly Color handsColor = Color.Accent;
+        static readonly Color dateColor = Color.White;
+
         BoxView[] tickMarks = new BoxView[100];
         BoxView secondHand, minuteHand, hourHand;
 
@@ -31,21 +35,24 @@ namespace BoxViewClock
         {
             RepublicanDatetime repTime = new RepublicanDatetime(DateTime.Now);
             AbsoluteLayout absoluteLayout = new AbsoluteLayout();
-            String month = "m" + repTime.RepublicanMonth.ToString("00");
             
-            this.BackgroundImage = month + ".jpg";
-            
+            this.BackgroundImage = $"m{repTime.RepublicanMonth.ToString("00")}.jpg";
+
+            // create and add the date
             Label dayLabel = new Label();
             dayLabel.FontSize = 30;
+            dayLabel.TextColor = dateColor;
             dayLabel.HorizontalTextAlignment = TextAlignment.Center;
+            dayLabel.Margin = 10;
             dayLabel.Text = repTime.ToString();
             absoluteLayout.Children.Add(dayLabel);
+
             // Create the tick marks (to be sized and positioned later)
             for (int i = 0; i < tickMarks.Length; i++)
             {
                 tickMarks[i] = new BoxView
                 {
-                    Color = Color.Accent
+                    Color = tickMarksColor
                 };
                 absoluteLayout.Children.Add(tickMarks[i]);
             }
@@ -54,17 +61,17 @@ namespace BoxViewClock
             absoluteLayout.Children.Add(hourHand = 
                 new BoxView
                 {
-                    Color = Color.Accent
+                    Color = handsColor
                 });
             absoluteLayout.Children.Add(minuteHand = 
                 new BoxView
                 {
-                    Color = Color.Accent
+                    Color = handsColor
                 });
             absoluteLayout.Children.Add(secondHand = 
                 new BoxView
                 {
-                    Color = Color.Accent
+                    Color = handsColor
                 });
 
             Content = absoluteLayout;
