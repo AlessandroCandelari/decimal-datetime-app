@@ -13,8 +13,8 @@ namespace BoxViewClock
         private const int REPUBLICAN_MINUTES_IN_HOUR = 100;
         private const int REPUBLICAN_SECONDS_IN_MINUTE = 100;
 
-        private DateTime FIRST_DATETIME = new DateTime(2016, 9, 22);
-        private const int FIRST_YEAR = 225;
+        private DateTime FIRST_DATETIME = new DateTime(1980, 9, 22);
+        private const int FIRST_YEAR = 189;
         private static List<Int32> bisestili = new List<int>();
         public DateTime datetime { get; private set; }
         private int totalRepublicanSecondsInDay = 0;
@@ -65,6 +65,15 @@ namespace BoxViewClock
         }
         private void InitBisestili()
         {
+			bisestili.Add(189);
+			bisestili.Add(193);
+			bisestili.Add(197);
+			bisestili.Add(201);
+			bisestili.Add(206);
+			bisestili.Add(210);
+			bisestili.Add(214);
+			bisestili.Add(218);
+			bisestili.Add(222);
             bisestili.Add(226);
             bisestili.Add(230);
         }

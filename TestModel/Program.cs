@@ -7,7 +7,7 @@ namespace TestModel
     {
         static void Main(string[] args)
         {
-            DateTime d = new DateTime(2016, 10, 3, 13, 49, 00);
+            DateTime d = new DateTime(1984, 1, 5, 13, 49, 00);
             Console.WriteLine(d.ToShortDateString());
             var rep = new RepublicanDatetime(d);
 
@@ -20,7 +20,7 @@ namespace TestModel
             Console.WriteLine(rep.RepublicanDay);
 
 
-            d = new DateTime(2018, 9, 23, 13, 49, 00);
+            d = new DateTime(1990, 3, 14, 13, 49, 00);
             Console.WriteLine(d.ToShortDateString());
             rep = new RepublicanDatetime(d);
 
