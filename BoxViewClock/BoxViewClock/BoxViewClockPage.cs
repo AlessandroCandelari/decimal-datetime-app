@@ -25,11 +25,14 @@ namespace BoxViewClock
         static readonly HandParams hourParams = new HandParams(0.125, 0.65, 0.9);
 
         static readonly Color tickMarksColor = Color.Accent;
-        static readonly Color handsColor = Color.Accent;
+        static readonly Color handsHourColor = Color.FromRgb(0.501960813999176, 0.796078443527222, 0.768627464771271);
+        static readonly Color handsMinuteColor = Color.FromRgb(0.601960813999176, 0.796078443527222, 0.768627464771271);
+        static readonly Color handsSecondColor = Color.FromRgb(0.701960813999176, 0.796078443527222, 0.768627464771271);
         static readonly Color dateColor = Color.White;
 
-        BoxView[] tickMarks = new BoxView[100];
-        BoxView secondHand, minuteHand, hourHand;
+        private Label dayLabel;
+        private BoxView[] tickMarks = new BoxView[100];
+        private BoxView secondHand, minuteHand, hourHand;
 
         public BoxViewClockPage()
         {
@@ -39,7 +42,7 @@ namespace BoxViewClock
             this.BackgroundImage = $"m{repTime.RepublicanMonth.ToString("00")}.jpg";
 
             // create and add the date
-            Label dayLabel = new Label();
+            dayLabel = new Label();
             dayLabel.FontSize = 30;
             dayLabel.TextColor = dateColor;
             dayLabel.HorizontalTextAlignment = TextAlignment.Center;
@@ -61,17 +64,17 @@ namespace BoxViewClock
             absoluteLayout.Children.Add(hourHand = 
                 new BoxView
                 {
-                    Color = handsColor
+                    Color = handsHourColor
                 });
             absoluteLayout.Children.Add(minuteHand = 
                 new BoxView
                 {
-                    Color = handsColor
+                    Color = handsMinuteColor
                 });
             absoluteLayout.Children.Add(secondHand = 
                 new BoxView
                 {
-                    Color = handsColor
+                    Color = handsSecondColor
                 });
 
             Content = absoluteLayout;
@@ -125,6 +128,14 @@ namespace BoxViewClock
         {
             // Set rotation angles for hour and minute hands.
             RepublicanDatetime repTime = new RepublicanDatetime(DateTime.Now);
+            if(repTime.RepublicanHours.Equals(0) && repTime.RepublicanMinutes.Equals(0) && repTime.RepublicanSeconds.Equals(0))
+            {
+                dayLabel.Text = repTime.ToString();
+                if (repTime.RepublicanDay.Equals(1))
+                {
+                    this.BackgroundImage = $"m{repTime.RepublicanMonth.ToString("00")}.jpg";
+                }
+            }
             hourHand.Rotation = 36 * repTime.RepublicanHours + 0.36 * repTime.RepublicanMinutes;
             minuteHand.Rotation = 3.6 * repTime.RepublicanMinutes + 0.036 * repTime.RepublicanSeconds;
 
