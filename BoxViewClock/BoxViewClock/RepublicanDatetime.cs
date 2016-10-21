@@ -29,6 +29,35 @@ namespace BoxViewClock
             }
             return result;
         }
+        public RepublicanDatetime(int year, int month, int day)
+        {
+            if(year < FIRST_YEAR || month < 1 || month > 13 || day < 1 || day > 30)
+            {
+                throw new ArgumentException("Parametri di inizializzazione data errati");
+            }
+            if (!bisestili.Any())
+            {
+                InitBisestili();
+            }
+            this.totalMilliSeconds = 0;
+            var totalDays = 0;
+            for(int i = FIRST_YEAR; i < year; i++)
+            {
+                if (bisestili.Contains(i))
+                {
+                    totalDays += 366;
+                }
+                else
+                {
+                    totalDays += 365;
+                }
+            }
+            totalDays += ((month - 1) * 30);
+            totalDays += day;
+            this.totalRepublicanDays = totalDays;
+            this.datetime = FIRST_DATETIME.AddDays(totalDays - 1);
+            this.InitDate();
+        }
         public RepublicanDatetime(DateTime datetime)
         {
             if (!bisestili.Any())
