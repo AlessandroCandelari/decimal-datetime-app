@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BoxViewClock.i18n;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,6 +29,36 @@ namespace BoxViewClock
                 result = 366;
             }
             return result;
+        }
+        public String MonthName
+        {
+            get
+            {
+                return this.GetMonthName(this.RepublicanMonth);
+            }
+        }
+        public String DayName
+        {
+            get
+            {
+                return this.GetDayName(this.RepublicanDayInYear);
+            }
+        }
+        private String GetMonthName(int month)
+        {
+            if(month > 0 && month < 14)
+            {
+                return Months.ResourceManager.GetString("m" + month.ToString("00"));
+            }
+            return string.Empty;
+        }
+        private String GetDayName(int day)
+        {
+            if (day > 0 && day < 366)
+            {
+                return Days.ResourceManager.GetString("d" + day.ToString("000"));
+            }
+            return string.Empty;
         }
         public RepublicanDatetime(int year, int month, int day)
         {
@@ -140,11 +171,38 @@ namespace BoxViewClock
             }
         }
         public int RepublicanDay { get; private set; }
+        public int RepublicanDayInYear {
+            get
+            {
+                int result = RepublicanDay;
+                for(int i=2; i<= RepublicanMonth; i++)
+                {
+                    result += 30;
+                }
+                return result;
+            }
+        }
         public int RepublicanMonth { get; private set; }
         public int RepublicanYear { get; private set; }
         public override string ToString()
         {
             return $"{this.RepublicanDay.ToString("00")}-{this.RepublicanMonth.ToString("00")}-{this.RepublicanYear}";
+        }
+        public string ToString(string format)
+        {
+            if (String.IsNullOrEmpty(format))
+            {
+                return ToString();
+            }
+            if ("ddd-MMMM-yyy".Equals(format))
+            {
+                return $"{this.GetDayName(this.RepublicanDayInYear)}-{this.GetMonthName(this.RepublicanMonth)}-{this.RepublicanYear}";
+            }
+            if ("dd-MMMM-yyy".Equals(format))
+            {
+                return $"{this.RepublicanDay.ToString("00")}-{this.GetMonthName(this.RepublicanMonth)}-{this.RepublicanYear}";
+            }
+            return ToString();
         }
     }
 }

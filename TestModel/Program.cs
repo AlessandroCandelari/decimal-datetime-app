@@ -17,8 +17,9 @@ namespace TestModel
             rep = new RepublicanDatetime(d);
             Console.WriteLine(rep.ToString());
 
-            rep = new RepublicanDatetime(225, 1, 26);
+            rep = new RepublicanDatetime(225, 2, 2);
             Console.WriteLine(rep.ToString());
+            Console.WriteLine(rep.ToString("ddd-MMMM-yyy"));
 
             Console.ReadLine();
         }

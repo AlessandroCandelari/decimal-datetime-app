@@ -37,6 +37,16 @@
     <Compile Include="App.cs" />
     <Compile Include="BoxViewClockPage.cs" />
     <Compile Include="ClockView.cs" />
+    <Compile Include="i18n\Days.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Days.resx</DependentUpon>
+    </Compile>
+    <Compile Include="i18n\Months.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Months.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepublicanDatetime.cs" />
   </ItemGroup>
@@ -61,6 +71,17 @@
     <Reference Include="Xamarin.Forms.Xaml">
       <HintPath>..\..\packages\Xamarin.Forms.2.3.2.127\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Xaml.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="i18n\Days.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Days.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="i18n\Months.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Months.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

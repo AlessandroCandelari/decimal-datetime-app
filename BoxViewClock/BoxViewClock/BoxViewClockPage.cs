@@ -8,6 +8,7 @@ namespace BoxViewClock
         static readonly Color dateColor = Color.White;
 
         private Label dayLabel;
+        private Label dayNameLabel;
         private ClockView clockView;
 
         public BoxViewClockPage()
@@ -17,14 +18,22 @@ namespace BoxViewClock
             
             this.BackgroundImage = $"m{repTime.RepublicanMonth.ToString("00")}.jpg";
 
-            // create and add the date
             dayLabel = new Label();
             dayLabel.FontSize = 30;
             dayLabel.TextColor = dateColor;
             dayLabel.HorizontalTextAlignment = TextAlignment.Center;
             dayLabel.Margin = 10;
-            dayLabel.Text = repTime.ToString();
+            dayLabel.Text = repTime.ToString("dd-MMMM-yyy");
             absoluteLayout.Children.Add(dayLabel);
+
+            dayNameLabel = new Label();
+            dayNameLabel.FontSize = 30;
+            dayNameLabel.TextColor = dateColor;
+            dayNameLabel.HorizontalTextAlignment = TextAlignment.Center;
+            dayNameLabel.Margin = 10;
+            dayNameLabel.Text = repTime.DayName;
+            absoluteLayout.Children.Add(dayNameLabel);
+            AbsoluteLayout.SetLayoutBounds(dayNameLabel, new Rectangle(0, 50, Width, 50));
 
             clockView = new ClockView();
             absoluteLayout.Children.Add(clockView);
