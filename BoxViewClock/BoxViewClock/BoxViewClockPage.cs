@@ -6,9 +6,9 @@ namespace BoxViewClock
     class BoxViewClockPage : ContentPage
     {
         static readonly Color dateColor = Color.White;
-
-        private Label dayLabel;
+        
         private Label dayNameLabel;
+        private Button dayButton;
         private ClockView clockView;
 
         public BoxViewClockPage()
@@ -17,15 +17,7 @@ namespace BoxViewClock
             AbsoluteLayout absoluteLayout = new AbsoluteLayout();
             
             this.BackgroundImage = $"m{repTime.RepublicanMonth.ToString("00")}.jpg";
-
-            dayLabel = new Label();
-            dayLabel.FontSize = 30;
-            dayLabel.TextColor = dateColor;
-            dayLabel.HorizontalTextAlignment = TextAlignment.Center;
-            dayLabel.Margin = 10;
-            dayLabel.Text = repTime.ToString("dd-MMMM-yyy");
-            absoluteLayout.Children.Add(dayLabel);
-
+            
             dayNameLabel = new Label();
             dayNameLabel.FontSize = 30;
             dayNameLabel.TextColor = dateColor;
@@ -42,6 +34,22 @@ namespace BoxViewClock
             // Attach a couple event handlers.
             Device.StartTimer(TimeSpan.FromMilliseconds(432), OnTimerTick);
             SizeChanged += OnPageSizeChanged;
+
+            dayButton = new Button();
+            dayButton.FontSize = 30;
+            dayButton.TextColor = dateColor;
+            dayButton.BackgroundColor = Color.Transparent;
+            dayButton.BorderColor = Color.Transparent;
+            dayButton.Margin = 10;
+            dayButton.Text = repTime.ToString("d MMMM yyy");
+            absoluteLayout.Children.Add(dayButton);
+            dayButton.Clicked += DayButton_Clicked;
+        }
+
+        private void DayButton_Clicked(object sender, EventArgs e)
+        {
+            RepublicanDatetime repTime = new RepublicanDatetime(DateTime.Now);
+            DisplayAlert("Data estesa", repTime.ToString("ddd d MMMM MMM M yyy, hh:mm:ss"), "ok");
         }
 
         void OnPageSizeChanged(object sender, EventArgs args)
@@ -56,7 +64,8 @@ namespace BoxViewClock
             RepublicanDatetime repTime = new RepublicanDatetime(DateTime.Now);
             if(repTime.RepublicanHours.Equals(0) && repTime.RepublicanMinutes.Equals(0) && repTime.RepublicanSeconds.Equals(0))
             {
-                dayLabel.Text = repTime.ToString();
+                dayButton.Text = repTime.ToString("d MMMM yyy");
+                dayNameLabel.Text = repTime.DayName;
                 if (repTime.RepublicanDay.Equals(1))
                 {
                     this.BackgroundImage = $"m{repTime.RepublicanMonth.ToString("00")}.jpg";
