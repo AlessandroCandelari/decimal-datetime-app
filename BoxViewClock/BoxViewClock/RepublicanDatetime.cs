@@ -89,6 +89,18 @@ namespace BoxViewClock
             this.datetime = FIRST_DATETIME.AddDays(totalDays - 1);
             this.InitDate();
         }
+        public RepublicanDatetime(int year, int month, int day, int hour, int minute, int second) : this(year, month, day)
+        {
+            if(hour < 0 || hour > 9 || minute < 0 || minute > 99 || second < 0 || second > 99)
+            {
+                throw new ArgumentException("Parametri di inizializzazione data errati");
+            }
+            totalMilliSeconds = Decimal.ToInt32(second * 1000 * SECONDS_RATIO);
+            totalMilliSeconds += Decimal.ToInt32(minute * REPUBLICAN_SECONDS_IN_MINUTE * 1000 * SECONDS_RATIO);
+            totalMilliSeconds += Decimal.ToInt32(hour * REPUBLICAN_MINUTES_IN_HOUR * REPUBLICAN_SECONDS_IN_MINUTE * 1000 * SECONDS_RATIO);
+            totalRepublicanSecondsInDay = Decimal.ToInt32((totalMilliSeconds / SECONDS_RATIO) / 1000);
+            this.InitDate();
+        }
         public RepublicanDatetime(DateTime datetime)
         {
             if (!bisestili.Any())
@@ -202,7 +214,8 @@ namespace BoxViewClock
             {
                 return $"{this.RepublicanDay.ToString("00")}-{this.GetMonthName(this.RepublicanMonth)}-{this.RepublicanYear}";
             }
-            return ToString();
+            return RepublicanDatetimeFormat.Format(this, format); 
+                //ToString();
         }
     }
 }
