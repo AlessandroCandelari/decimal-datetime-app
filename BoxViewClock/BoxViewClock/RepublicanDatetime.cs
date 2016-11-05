@@ -9,7 +9,7 @@ namespace BoxViewClock
 {
     public class RepublicanDatetime
     {
-        private const decimal SECONDS_RATIO = 0.864M;
+        internal const decimal SECONDS_RATIO = 0.864M;
         private const int REPUBLICAN_HOURS_IN_DAY = 10;
         private const int REPUBLICAN_MINUTES_IN_HOUR = 100;
         private const int REPUBLICAN_SECONDS_IN_MINUTE = 100;
