@@ -6,6 +6,7 @@ namespace BoxViewClock
     class BoxViewClockPage : ContentPage
     {
         static readonly Color dateColor = Color.White;
+        private const string formatKey = "format";
         private int timerPeriod = Convert.ToInt32(RepublicanDatetime.SECONDS_RATIO * 500);
 
         private Label dayNameLabel;
@@ -50,7 +51,15 @@ namespace BoxViewClock
             dayLabel.TextColor = dateColor;
             dayLabel.VerticalTextAlignment = TextAlignment.Center;
             dayLabel.HorizontalTextAlignment = TextAlignment.Center;
-            dayLabel.Text = repTime.ToString("d MMMM yyy");
+            if (Application.Current.Properties.ContainsKey(formatKey))
+            {
+                dayLabel.Text = repTime.ToString(Application.Current.Properties[formatKey].ToString());
+            }
+            else
+            {
+                dayLabel.Text = repTime.ToString("d MMMM yyy");
+            }
+            
             absoluteLayout.Children.Add(dayLabel);
             
             Content = absoluteLayout;
@@ -63,6 +72,26 @@ namespace BoxViewClock
         {
             RepublicanDatetime repTime = new RepublicanDatetime(DateTime.Now);
             DisplayAlert("Data estesa", repTime.ToString("ddd d MMMM MMM M yyy, hh:mm:ss"), "ok");
+        }
+
+        private void ConfigButton_Clicked(object sender, EventArgs e)
+        {
+            var prop = Application.Current.Properties;
+            if (prop.ContainsKey(formatKey))
+            {
+                if(prop[formatKey].Equals("d MMM yyy"))
+                {
+                    prop[formatKey] = "d MMMM yyy";
+                }else
+                {
+                    prop[formatKey] = "d MMM yyy";
+                }
+                
+            }
+            else
+            {
+                prop.Add(formatKey, "d MMM yyy");
+            }
         }
 
         private void OnPageSizeChanged(object sender, EventArgs args)
