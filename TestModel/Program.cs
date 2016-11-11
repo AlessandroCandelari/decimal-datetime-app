@@ -33,6 +33,9 @@ namespace TestModel
             Console.WriteLine(outString);
             outString = rep.ToString("\\ddd pippo MM bo\\h yyyy hh?mm?ss");
             Console.WriteLine(outString);
+            rep = RepublicanDatetime.Now;
+            outString = rep.ToString("dd MM Y");
+            Console.WriteLine(outString);
 
 
             Console.ReadLine();

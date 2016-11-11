@@ -17,7 +17,7 @@ namespace BoxViewClock
 
         public BoxViewClockPage()
         {
-            RepublicanDatetime repTime = new RepublicanDatetime(DateTime.Now);
+            RepublicanDatetime repTime = RepublicanDatetime.Now;
             AbsoluteLayout absoluteLayout = new AbsoluteLayout();
 
             backgroundImage = new Image
@@ -70,7 +70,7 @@ namespace BoxViewClock
 
         private void DayButton_Clicked(object sender, EventArgs e)
         {
-            RepublicanDatetime repTime = new RepublicanDatetime(DateTime.Now);
+            RepublicanDatetime repTime = RepublicanDatetime.Now;
             DisplayAlert("Data estesa", repTime.ToString("ddd d MMMM MMM M yyy, hh:mm:ss"), "ok");
         }
 
@@ -116,7 +116,7 @@ namespace BoxViewClock
         bool OnTimerTick()
         {
             // Set rotation angles for hour and minute hands.
-            RepublicanDatetime repTime = new RepublicanDatetime(DateTime.Now);
+            RepublicanDatetime repTime = RepublicanDatetime.Now;
             if(repTime.RepublicanHours.Equals(0) && repTime.RepublicanMinutes.Equals(0) && repTime.RepublicanSeconds.Equals(0))
             {
                 dayLabel.Text = repTime.ToString("d MMMM yyy");

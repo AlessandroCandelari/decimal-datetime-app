@@ -15,8 +15,6 @@ namespace BoxViewClock
             'f', 'F', 
             /*'g', 'G',*/ //era
             'm', 'M',
-            's', //short
-            'T', //long
             'y'
         };
 
@@ -34,11 +32,9 @@ namespace BoxViewClock
         internal static String Format(RepublicanDatetime dateTime, String format)
         {
             StringBuilder result = new StringBuilder();
-            // This is a flag to indicate if we are formating hour/minute/second only. 
-            bool bTimeOnly = true;
 
             int i = 0;
-            int tokenLen, hour12;
+            int tokenLen;
 
             while (i < format.Length)
             {
@@ -118,7 +114,6 @@ namespace BoxViewClock
                         {
                             result.Append(dateTime.DayName);
                         }
-                        bTimeOnly = false;
                         break;
                     case 'M':
                         // tokenLen == 1 : Month as digits with no leading zero.
@@ -143,7 +138,6 @@ namespace BoxViewClock
                                 result.Append(abbreviateMonth);
                             }
                         }
-                        bTimeOnly = false;
                         break;
                     case 'y':
                         int year = dateTime.RepublicanYear;
@@ -157,7 +151,10 @@ namespace BoxViewClock
                             String fmtPattern = "D" + tokenLen;
                             result.Append(year.ToString(fmtPattern, CultureInfo.InvariantCulture));
                         }
-                        bTimeOnly = false;
+                        break;
+                    case 'Y':
+                        tokenLen = ParseRepeatPattern(format, i, ch);
+                        result.Append(ToRoman(dateTime.RepublicanYear));
                         break;
                     case '\\':
                         // Escaped character.  Can be used to insert character into the format string. 
@@ -200,6 +197,25 @@ namespace BoxViewClock
                 format += "0";
             }
             result.Append(value.ToString(format));
+        }
+        private static string ToRoman(int number)
+        {
+            if ((number < 0) || (number > 3999)) throw new ArgumentOutOfRangeException("insert value betwheen 1 and 3999");
+            if (number < 1) return string.Empty;
+            if (number >= 1000) return "M" + ToRoman(number - 1000);
+            if (number >= 900) return "CM" + ToRoman(number - 900);
+            if (number >= 500) return "D" + ToRoman(number - 500);
+            if (number >= 400) return "CD" + ToRoman(number - 400);
+            if (number >= 100) return "C" + ToRoman(number - 100);
+            if (number >= 90) return "XC" + ToRoman(number - 90);
+            if (number >= 50) return "L" + ToRoman(number - 50);
+            if (number >= 40) return "XL" + ToRoman(number - 40);
+            if (number >= 10) return "X" + ToRoman(number - 10);
+            if (number >= 9) return "IX" + ToRoman(number - 9);
+            if (number >= 5) return "V" + ToRoman(number - 5);
+            if (number >= 4) return "IV" + ToRoman(number - 4);
+            if (number >= 1) return "I" + ToRoman(number - 1);
+            throw new ArgumentOutOfRangeException();
         }
     }
 }

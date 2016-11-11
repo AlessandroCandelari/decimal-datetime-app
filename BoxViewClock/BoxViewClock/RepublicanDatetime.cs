@@ -14,6 +14,14 @@ namespace BoxViewClock
         private const int REPUBLICAN_MINUTES_IN_HOUR = 100;
         private const int REPUBLICAN_SECONDS_IN_MINUTE = 100;
 
+        public static RepublicanDatetime Now
+        {
+            get
+            {
+                return new RepublicanDatetime(DateTime.Now);
+            }
+        }
+
         private DateTime FIRST_DATETIME = new DateTime(1980, 9, 22);
         private const int FIRST_YEAR = 189;
         private static List<Int32> bisestili = new List<int>();
@@ -156,7 +164,6 @@ namespace BoxViewClock
                 var totalRepMilli = this.totalMilliSeconds / SECONDS_RATIO;
                 var subtract = (((((this.RepublicanHours * REPUBLICAN_MINUTES_IN_HOUR) + this.RepublicanMinutes) * REPUBLICAN_SECONDS_IN_MINUTE) + this.RepublicanSeconds) * 1000);
                 var mill = totalRepMilli - subtract;
-                    //(this.totalMilliSeconds / SECONDS_RATIO) % (REPUBLICAN_SECONDS_IN_MINUTE * REPUBLICAN_MINUTES_IN_HOUR * REPUBLICAN_HOURS_IN_DAY * 1000);
                 return mill;
             }
         }
@@ -198,7 +205,7 @@ namespace BoxViewClock
         public int RepublicanYear { get; private set; }
         public override string ToString()
         {
-            return $"{this.RepublicanDay.ToString("00")}-{this.RepublicanMonth.ToString("00")}-{this.RepublicanYear}";
+            return RepublicanDatetimeFormat.Format(this, "dd-MM-yyy");
         }
         public string ToString(string format)
         {
@@ -206,16 +213,7 @@ namespace BoxViewClock
             {
                 return ToString();
             }
-            if ("ddd-MMMM-yyy".Equals(format))
-            {
-                return $"{this.GetDayName(this.RepublicanDayInYear)}-{this.GetMonthName(this.RepublicanMonth)}-{this.RepublicanYear}";
-            }
-            if ("dd-MMMM-yyy".Equals(format))
-            {
-                return $"{this.RepublicanDay.ToString("00")}-{this.GetMonthName(this.RepublicanMonth)}-{this.RepublicanYear}";
-            }
             return RepublicanDatetimeFormat.Format(this, format); 
-                //ToString();
         }
     }
 }

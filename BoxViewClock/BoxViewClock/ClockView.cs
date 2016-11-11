@@ -112,7 +112,7 @@ namespace BoxViewClock
         public bool OnTimerTick()
         {
             // Set rotation angles for hour and minute hands.
-            RepublicanDatetime repTime = new RepublicanDatetime(DateTime.Now);
+            RepublicanDatetime repTime = RepublicanDatetime.Now;
             hourHand.Rotation = 36 * repTime.RepublicanHours + 0.36 * repTime.RepublicanMinutes;
             minuteHand.Rotation = 3.6 * repTime.RepublicanMinutes + 0.036 * repTime.RepublicanSeconds;
             secondHand.Rotation = 3.6 * (repTime.RepublicanSeconds);// + t);
