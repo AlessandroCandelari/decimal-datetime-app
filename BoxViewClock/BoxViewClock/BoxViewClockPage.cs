@@ -6,12 +6,13 @@ namespace BoxViewClock
     class BoxViewClockPage : ContentPage
     {
         static readonly Color dateColor = Color.White;
-        private const string formatKey = "format";
+        
         private int timerPeriod = Convert.ToInt32(RepublicanDatetime.SECONDS_RATIO * 500);
 
         private Label dayNameLabel;
         private Label dayLabel;
         private Button infoButton;
+        private Button settingsButton;
         private ClockView clockView;
         private Image backgroundImage;
 
@@ -46,20 +47,22 @@ namespace BoxViewClock
             absoluteLayout.Children.Add(infoButton);
             infoButton.Clicked += DayButton_Clicked;
 
+            settingsButton = new Button();
+            settingsButton.BackgroundColor = Color.Transparent;
+            settingsButton.BorderColor = Color.Transparent;
+            settingsButton.Image = "Icon.png";
+
+            absoluteLayout.Children.Add(settingsButton);
+            settingsButton.Clicked += SettingsButton_Clicked;
+
+
             dayLabel = new Label();
             dayLabel.FontSize = 30;
             dayLabel.TextColor = dateColor;
             dayLabel.VerticalTextAlignment = TextAlignment.Center;
             dayLabel.HorizontalTextAlignment = TextAlignment.Center;
-            if (Application.Current.Properties.ContainsKey(formatKey))
-            {
-                dayLabel.Text = repTime.ToString(Application.Current.Properties[formatKey].ToString());
-            }
-            else
-            {
-                dayLabel.Text = repTime.ToString("d MMMM yyy");
-            }
-            
+            dayLabel.Text = repTime.ToString(FormatSettings.ShortFormat);
+
             absoluteLayout.Children.Add(dayLabel);
             
             Content = absoluteLayout;
@@ -68,32 +71,23 @@ namespace BoxViewClock
             SizeChanged += OnPageSizeChanged;
         }
 
+        private async void SettingsButton_Clicked(object sender, EventArgs e)
+        {
+            Action refresh = () =>
+            {
+                dayLabel.Text = RepublicanDatetime.Now.ToString(FormatSettings.ShortFormat);
+            };
+            var settingsPage = new Settings(refresh);
+            await Navigation.PushModalAsync(settingsPage);
+            
+        }
+
         private void DayButton_Clicked(object sender, EventArgs e)
         {
             RepublicanDatetime repTime = RepublicanDatetime.Now;
-            DisplayAlert("Data estesa", repTime.ToString("ddd d MMMM MMM M yyy, hh:mm:ss"), "ok");
+            DisplayAlert("Data estesa", repTime.ToString(FormatSettings.LongFormat), "ok");
         }
-
-        private void ConfigButton_Clicked(object sender, EventArgs e)
-        {
-            var prop = Application.Current.Properties;
-            if (prop.ContainsKey(formatKey))
-            {
-                if(prop[formatKey].Equals("d MMM yyy"))
-                {
-                    prop[formatKey] = "d MMMM yyy";
-                }else
-                {
-                    prop[formatKey] = "d MMM yyy";
-                }
-                
-            }
-            else
-            {
-                prop.Add(formatKey, "d MMM yyy");
-            }
-        }
-
+        
         private void OnPageSizeChanged(object sender, EventArgs args)
         {
             AbsoluteLayout.SetLayoutBounds(backgroundImage, new Rectangle(0, 0, Width, Height));
@@ -103,23 +97,25 @@ namespace BoxViewClock
                 AbsoluteLayout.SetLayoutBounds(dayLabel, new Rectangle(0, 15, Width, 40));
                 AbsoluteLayout.SetLayoutBounds(dayNameLabel, new Rectangle(0, 55, Width, 40));
                 AbsoluteLayout.SetLayoutBounds(infoButton, new Rectangle(Width - 70, Height - 70, 70, 70));
-            }else
+                AbsoluteLayout.SetLayoutBounds(settingsButton, new Rectangle(0, Height - 70, 70, 70));
+            }
+            else
             {
                 AbsoluteLayout.SetLayoutBounds(clockView, new Rectangle(Width / 2, 0, Width / 2, Height));
                 AbsoluteLayout.SetLayoutBounds(dayLabel, new Rectangle(0, 5, Width/2, 40));
                 AbsoluteLayout.SetLayoutBounds(dayNameLabel, new Rectangle(0, 45, Width/2, 40));
                 AbsoluteLayout.SetLayoutBounds(infoButton, new Rectangle(Width - 70, Height - 70, 70, 70));
+                AbsoluteLayout.SetLayoutBounds(settingsButton, new Rectangle(0, Height - 70, 70, 70));
             }
             this.clockView.OnPageSizeChanged(sender, args);
         }
 
-        bool OnTimerTick()
+        private bool OnTimerTick()
         {
-            // Set rotation angles for hour and minute hands.
             RepublicanDatetime repTime = RepublicanDatetime.Now;
             if(repTime.RepublicanHours.Equals(0) && repTime.RepublicanMinutes.Equals(0) && repTime.RepublicanSeconds.Equals(0))
             {
-                dayLabel.Text = repTime.ToString("d MMMM yyy");
+                dayLabel.Text = repTime.ToString(FormatSettings.ShortFormat);
                 dayNameLabel.Text = repTime.DayName;
                 if (repTime.RepublicanDay.Equals(1))
                 {
