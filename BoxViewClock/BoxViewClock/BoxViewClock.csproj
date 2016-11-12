@@ -42,6 +42,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Days.resx</DependentUpon>
     </Compile>
+    <Compile Include="i18n\MonthsDes.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MonthsDes.resx</DependentUpon>
+    </Compile>
     <Compile Include="i18n\Months.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -77,6 +82,11 @@
     <EmbeddedResource Include="i18n\Days.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Days.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="i18n\MonthsDes.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MonthsDes.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="i18n\Months.resx">
       <Generator>ResXFileCodeGenerator</Generator>

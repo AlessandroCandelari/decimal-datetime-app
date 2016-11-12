@@ -37,6 +37,9 @@ namespace TestModel
             outString = rep.ToString("dd MM Y");
             Console.WriteLine(outString);
 
+            outString = rep.ToString("dd MMMMM Y");
+            Console.WriteLine(outString);
+
 
             Console.ReadLine();
         }

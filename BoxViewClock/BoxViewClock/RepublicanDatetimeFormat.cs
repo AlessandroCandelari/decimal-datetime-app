@@ -118,8 +118,9 @@ namespace BoxViewClock
                     case 'M':
                         // tokenLen == 1 : Month as digits with no leading zero.
                         // tokenLen == 2 : Month as digits with leading zero for single-digit months.
-                        // tokenLen == 3 : Month as a three-letter abbreviation. 
-                        // tokenLen >= 4 : Month as its full name.
+                        // tokenLen == 3 : Month as a three-letter abbreviation.
+                        // tokenLen == 4 : Month as its full name. 
+                        // tokenLen >= 5 : Month as its description.
                         tokenLen = ParseRepeatPattern(format, i, ch);
                         int month = dateTime.RepublicanMonth;
                         if (tokenLen <= 2)
@@ -128,7 +129,10 @@ namespace BoxViewClock
                         }
                         else
                         {
-                            if (tokenLen >= 4)
+                            if (tokenLen > 4)
+                            {
+                                result.Append(dateTime.MonthDescription);
+                            }else if (tokenLen == 4)
                             {
                                 result.Append(dateTime.MonthName);
                             }

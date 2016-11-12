@@ -45,6 +45,18 @@ namespace BoxViewClock
                 return this.GetMonthName(this.RepublicanMonth);
             }
         }
+        public String MonthDescription
+        {
+            get
+            {
+                int month = this.RepublicanMonth;
+                if (month > 0 && month < 14)
+                {
+                    return MonthsDes.ResourceManager.GetString("m" + month.ToString("00"));
+                }
+                return string.Empty;
+            }
+        }
         public String DayName
         {
             get
