@@ -125,6 +125,7 @@
     <AndroidResource Include="Resources\Drawable\m09.jpg" />
     <AndroidResource Include="Resources\Drawable\m10.jpg" />
     <AndroidResource Include="Resources\Drawable\m11.jpg" />
+    <AndroidResource Include="Resources\Drawable\help.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BoxViewClock\BoxViewClock.csproj">

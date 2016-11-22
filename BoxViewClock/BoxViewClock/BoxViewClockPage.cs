@@ -42,7 +42,7 @@ namespace BoxViewClock
             infoButton = new Button();
             infoButton.BackgroundColor = Color.Transparent;
             infoButton.BorderColor = Color.Transparent;
-            infoButton.Image = "Icon.png";
+            infoButton.Image = "help.png";
             
             absoluteLayout.Children.Add(infoButton);
             infoButton.Clicked += DayButton_Clicked;
@@ -90,9 +90,9 @@ namespace BoxViewClock
         
         private void OnPageSizeChanged(object sender, EventArgs args)
         {
-            AbsoluteLayout.SetLayoutBounds(backgroundImage, new Rectangle(0, 0, Width, Height));
             if (Height > Width)
             {
+                AbsoluteLayout.SetLayoutBounds(backgroundImage, new Rectangle(0, 0, Width, Height));
                 AbsoluteLayout.SetLayoutBounds(clockView, new Rectangle(0, 0, Width, Height));
                 AbsoluteLayout.SetLayoutBounds(dayLabel, new Rectangle(0, 15, Width, 40));
                 AbsoluteLayout.SetLayoutBounds(dayNameLabel, new Rectangle(0, 55, Width, 40));
@@ -101,6 +101,7 @@ namespace BoxViewClock
             }
             else
             {
+                AbsoluteLayout.SetLayoutBounds(backgroundImage, new Rectangle(0, 0, Width, 2 * Height));
                 AbsoluteLayout.SetLayoutBounds(clockView, new Rectangle(Width / 2, 0, Width / 2, Height));
                 AbsoluteLayout.SetLayoutBounds(dayLabel, new Rectangle(0, 5, Width/2, 40));
                 AbsoluteLayout.SetLayoutBounds(dayNameLabel, new Rectangle(0, 45, Width/2, 40));
@@ -113,7 +114,9 @@ namespace BoxViewClock
         private bool OnTimerTick()
         {
             RepublicanDatetime repTime = RepublicanDatetime.Now;
-            if(repTime.RepublicanHours.Equals(0) && repTime.RepublicanMinutes.Equals(0) && repTime.RepublicanSeconds.Equals(0))
+            var changeDay = repTime.RepublicanHours.Equals(0) && repTime.RepublicanMinutes.Equals(0) && repTime.RepublicanSeconds.Equals(0);
+            var dayLabelContainsHour = FormatSettings.ShortFormat.Contains("h") || FormatSettings.ShortFormat.Contains("m") || FormatSettings.ShortFormat.Contains("s");
+            if (changeDay || dayLabelContainsHour)
             {
                 dayLabel.Text = repTime.ToString(FormatSettings.ShortFormat);
                 dayNameLabel.Text = repTime.DayName;
