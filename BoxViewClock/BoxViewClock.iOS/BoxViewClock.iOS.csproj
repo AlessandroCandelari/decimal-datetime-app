@@ -127,6 +127,7 @@
     <BundleResource Include="Resources\m11.jpg" />
     <BundleResource Include="Resources\m12.jpg" />
     <BundleResource Include="Resources\m13.jpg" />
+    <BundleResource Include="Resources\help.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Icon.png" />
