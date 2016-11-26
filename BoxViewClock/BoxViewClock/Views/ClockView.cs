@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace BoxViewClock
+namespace BoxViewClock.Views
 {
     public class ClockView : AbsoluteLayout
     {
@@ -32,7 +27,6 @@ namespace BoxViewClock
         static readonly Color handsHourColor = Color.FromRgb(0.501960813999176, 0.796078443527222, 0.768627464771271);
         static readonly Color handsMinuteColor = Color.FromRgb(0.601960813999176, 0.796078443527222, 0.768627464771271);
         static readonly Color handsSecondColor = Color.FromRgb(0.701960813999176, 0.796078443527222, 0.768627464771271);
-        static readonly Color dateColor = Color.White;
 
         private BoxView[] tickMarks = new BoxView[100];
         private BoxView secondHand, minuteHand, hourHand;

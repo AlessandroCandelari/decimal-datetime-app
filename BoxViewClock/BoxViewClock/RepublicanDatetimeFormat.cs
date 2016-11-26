@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace BoxViewClock
 {
@@ -190,7 +187,7 @@ namespace BoxViewClock
             {
                 return (-1);
             }
-            return ((int)format[pos + 1]);
+            return (format[pos + 1]);
         }
 
         private static void FormatDigits(StringBuilder result, int value, int tokenLen)

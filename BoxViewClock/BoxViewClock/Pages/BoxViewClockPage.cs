@@ -1,7 +1,8 @@
 ﻿using System;
+using BoxViewClock.Views;
 using Xamarin.Forms;
 
-namespace BoxViewClock
+namespace BoxViewClock.Pages
 {
     class BoxViewClockPage : ContentPage
     {
@@ -77,7 +78,7 @@ namespace BoxViewClock
             {
                 dayLabel.Text = RepublicanDatetime.Now.ToString(FormatSettings.ShortFormat);
             };
-            var settingsPage = new Settings(refresh);
+            var settingsPage = new SettingsPage(refresh);
             await Navigation.PushModalAsync(settingsPage);
             
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using BoxViewClock.Pages;
 using Xamarin.Forms;
 
 namespace BoxViewClock

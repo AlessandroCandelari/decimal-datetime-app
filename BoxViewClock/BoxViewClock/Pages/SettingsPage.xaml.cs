@@ -1,23 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 
-namespace BoxViewClock
+namespace BoxViewClock.Pages
 {
-    public partial class Settings : ContentPage
+    public partial class SettingsPage : ContentPage
     {
         private Action refresh;
 
-        public Settings()
+        public SettingsPage()
         {
             InitializeComponent();
         }
 
-        public Settings(Action refresh) : this()
+        public SettingsPage(Action refresh) : this()
         {
             this.refresh = refresh;
         }
