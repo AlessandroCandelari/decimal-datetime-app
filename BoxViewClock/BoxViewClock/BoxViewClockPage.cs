@@ -93,7 +93,7 @@ namespace BoxViewClock
             if (Height > Width)
             {
                 AbsoluteLayout.SetLayoutBounds(backgroundImage, new Rectangle(0, 0, Width, Height));
-                AbsoluteLayout.SetLayoutBounds(clockView, new Rectangle(0, 0, Width, Height));
+                AbsoluteLayout.SetLayoutBounds(clockView, new Rectangle(0, Width / 2, Width, Width));
                 AbsoluteLayout.SetLayoutBounds(dayLabel, new Rectangle(0, 15, Width, 40));
                 AbsoluteLayout.SetLayoutBounds(dayNameLabel, new Rectangle(0, 55, Width, 40));
                 AbsoluteLayout.SetLayoutBounds(infoButton, new Rectangle(Width - 70, Height - 70, 70, 70));
@@ -102,7 +102,7 @@ namespace BoxViewClock
             else
             {
                 AbsoluteLayout.SetLayoutBounds(backgroundImage, new Rectangle(0, 0, Width, 2 * Height));
-                AbsoluteLayout.SetLayoutBounds(clockView, new Rectangle(Width / 2, 0, Width / 2, Height));
+                AbsoluteLayout.SetLayoutBounds(clockView, new Rectangle(Width - Height, 0, Height, Height));
                 AbsoluteLayout.SetLayoutBounds(dayLabel, new Rectangle(0, 5, Width/2, 40));
                 AbsoluteLayout.SetLayoutBounds(dayNameLabel, new Rectangle(0, 45, Width/2, 40));
                 AbsoluteLayout.SetLayoutBounds(infoButton, new Rectangle(Width - 70, Height - 70, 70, 70));
