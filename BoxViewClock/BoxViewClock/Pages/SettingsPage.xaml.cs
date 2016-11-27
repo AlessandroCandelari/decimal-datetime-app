@@ -22,20 +22,28 @@ namespace BoxViewClock.Pages
         {
             var text = ((Entry)sender).Text;
             FormatSettings.ShortFormat = text;
-            refresh();
         }
         void Short_Added(object sender, EventArgs e)
         {
             ((Entry)sender).Text = FormatSettings.ShortFormat;
         }
+
         void Long_Changed(object sender, EventArgs e)
         {
-            var text = ((Editor)sender).Text;
+            var text = ((Entry)sender).Text;
             FormatSettings.LongFormat = text;
         }
         void Long_Added(object sender, EventArgs e)
         {
-            ((Editor)sender).Text = FormatSettings.LongFormat;
+            ((Entry)sender).Text = FormatSettings.LongFormat;
+        }
+
+        async void DismissButton_Clicked(object sender, EventArgs args)
+        {
+            Short.Unfocus();
+            Long.Unfocus();
+
+            await Navigation.PopModalAsync();
         }
     }
 }
