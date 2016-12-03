@@ -17,7 +17,7 @@
         <Entry x:Name="Short" TextChanged="Short_Changed" MeasureInvalidated="Short_Added" />
         	
         <Label Text="Formato data estesa"/>
-        <Entry x:Name="Long" TextChanged="Long_Changed" MeasureInvalidated="Long_Added" />
+        <Editor x:Name="Long" TextChanged="Long_Changed" MeasureInvalidated="Long_Added" HeightRequest="80" />
 
         <Button Text="Chiudi" Clicked="DismissButton_Clicked" />
     </StackLayout>

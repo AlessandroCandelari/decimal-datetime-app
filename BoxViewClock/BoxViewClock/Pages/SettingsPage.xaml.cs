@@ -30,12 +30,12 @@ namespace BoxViewClock.Pages
 
         void Long_Changed(object sender, EventArgs e)
         {
-            var text = ((Entry)sender).Text;
+            var text = ((Editor)sender).Text;
             FormatSettings.LongFormat = text;
         }
         void Long_Added(object sender, EventArgs e)
         {
-            ((Entry)sender).Text = FormatSettings.LongFormat;
+            ((Editor)sender).Text = FormatSettings.LongFormat;
         }
 
         async void DismissButton_Clicked(object sender, EventArgs args)

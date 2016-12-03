@@ -8,8 +8,8 @@ using Xamarin.Forms.Platform.Android;
 
 namespace BoxViewClock.Droid
 {
-    [Activity(Label = "Decimal Time", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-	public class MainActivity : FormsApplicationActivity
+    [Activity(ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+	public class MainActivity : FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle bundle)
         {
