@@ -8,7 +8,7 @@ namespace BoxViewClock.Pages
     {
         static readonly Color dateColor = Color.White;
         
-        private int timerPeriod = Convert.ToInt32(RepublicanDatetime.SECONDS_RATIO * 500);
+        private int timerPeriod = Convert.ToInt32(DecimalDatetime.SECONDS_RATIO * 500);
 
         private Label dayNameLabel;
         private Label dayLabel;
@@ -19,7 +19,7 @@ namespace BoxViewClock.Pages
 
         public BoxViewClockPage()
         {
-            RepublicanDatetime repTime = RepublicanDatetime.Now;
+            DecimalDatetime repTime = DecimalDatetime.Now;
             AbsoluteLayout absoluteLayout = new AbsoluteLayout();
 
             backgroundImage = new Image
@@ -76,7 +76,7 @@ namespace BoxViewClock.Pages
         {
             Action refresh = () =>
             {
-                dayLabel.Text = RepublicanDatetime.Now.ToString(FormatSettings.ShortFormat);
+                dayLabel.Text = DecimalDatetime.Now.ToString(FormatSettings.ShortFormat);
             };
             var settingsPage = new SettingsPage(refresh);
             await Navigation.PushModalAsync(settingsPage);
@@ -85,7 +85,7 @@ namespace BoxViewClock.Pages
 
         private void DayButton_Clicked(object sender, EventArgs e)
         {
-            RepublicanDatetime repTime = RepublicanDatetime.Now;
+            DecimalDatetime repTime = DecimalDatetime.Now;
             DisplayAlert("Data estesa", repTime.ToString(FormatSettings.LongFormat), "ok");
         }
         
@@ -114,7 +114,7 @@ namespace BoxViewClock.Pages
 
         private bool OnTimerTick()
         {
-            RepublicanDatetime repTime = RepublicanDatetime.Now;
+            DecimalDatetime repTime = DecimalDatetime.Now;
             var changeDay = repTime.RepublicanHours.Equals(0) && repTime.RepublicanMinutes.Equals(0) && repTime.RepublicanSeconds.Equals(0);
             var dayLabelContainsHour = FormatSettings.ShortFormat.Contains("h") || FormatSettings.ShortFormat.Contains("m") || FormatSettings.ShortFormat.Contains("s");
             if (changeDay || dayLabelContainsHour)

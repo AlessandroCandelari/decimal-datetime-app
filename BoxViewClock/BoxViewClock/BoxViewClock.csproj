@@ -34,24 +34,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="i18n\Days.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Days.resx</DependentUpon>
-    </Compile>
-    <Compile Include="i18n\MonthsDes.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MonthsDes.resx</DependentUpon>
-    </Compile>
-    <Compile Include="i18n\Months.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Months.resx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RepublicanDatetime.cs" />
-    <Compile Include="RepublicanDatetimeFormat.cs" />
     <Compile Include="FormatSettings.cs" />
     <Compile Include="Pages\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
@@ -71,20 +54,6 @@
   </Target>
   -->
   <ItemGroup>
-    <EmbeddedResource Include="i18n\Days.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Days.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="i18n\MonthsDes.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>MonthsDes.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="i18n\Months.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Months.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Pages\SettingsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
@@ -93,11 +62,11 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Pages\" />
-    <Folder Include="Views\" />
-  </ItemGroup>
-  <ItemGroup>
+    <Reference Include="DecimalDatetime">
+      <HintPath>..\..\..\DecimalDatetime\src\DecimalDatetime\bin\Release\netstandard1.6\DecimalDatetime.dll</HintPath>
+    </Reference>
     <Reference Include="Xamarin.Forms.Core">
       <HintPath>..\..\packages\Xamarin.Forms.2.3.3.168\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Core.dll</HintPath>
     </Reference>
